@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
+import fs from 'fs';
 
+const secretPath = '/run/secrets/MONGO_URI';
+if (fs.existsSync(secretPath)) {
+  process.env.MONGO_URI = fs.readFileSync(secretPath, 'utf8').trim();
+}
 
 
 

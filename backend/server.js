@@ -7,13 +7,18 @@ import cors from 'cors';
 
 import { logger} from "./middlewares/logEvents.js";
 import {errorHandler, notFound} from './middlewares/errorHandler.js';
-
+import fs from 'fs';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import doctorRoutes from  './routes/doctorRoutes.js';
 import verifyJWT from './middlewares/verifyJWT.js';
 import { ROLES_LIST } from './config/roles_list.js';
 import { verifyRoles } from './middlewares/verifyRoles.js';
+const secretPath = '/run/secrets/PORT';
+
+if(fs.existsSync(secretPath)){
+    process.env.PORT = fs.readFileSync(secretPath, 'utf8').trim();
+}
 let port = process.env.PORT || 6969;
 
 connectDB();

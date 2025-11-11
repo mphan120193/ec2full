@@ -8,6 +8,11 @@ import DentalBooking from '../models/DentalBookingModel.js';
 import DoctorSchedule from '../models/doctorScheduleModel.js';
 import dotenv from 'dotenv';
 dotenv.config();
+import fs from 'fs';
+const secretPath = '/run/secrets/CONFIRM_URL';
+if (fs.existsSync(secretPath)) {
+  process.env.CONFIRM_URL = fs.readFileSync(secretPath, 'utf8').trim();
+}
 
 
 

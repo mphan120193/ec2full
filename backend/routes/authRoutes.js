@@ -13,8 +13,19 @@ import { getAllusers, deleteUser, getAllCode, createUser, editUser,
     sendConfirmEmail, 
     verifyEmail, getAppointment } from '../controllers/authController.js';
 
-
+   
 const router = express.Router();
+import fs from 'fs';
+
+const secretPath = '/run/secrets/JWT_SECRET';
+if (fs.existsSync(secretPath)) {
+  process.env.JWT_SECRET = fs.readFileSync(secretPath, 'utf8').trim();
+}
+
+const secretPath1 = '/run/secrets/JWT_REFRESH_SECRET';
+if (fs.existsSync(secretPath)) {
+    process.env.JWT_REFRESH_SECRET = fs.readFileSync(secretPath1, 'utf8').trim();
+}
 
 
 

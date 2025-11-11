@@ -1,4 +1,11 @@
 import jwt from 'jsonwebtoken';
+import fs from 'fs';
+
+const secretPath = '/run/secrets/JWT_SECRET';
+if (fs.existsSync(secretPath)) {
+  process.env.JWT_SECRET = fs.readFileSync(secretPath, 'utf8').trim();
+}
+
 
 const verifyJWT = (req, res, next) => {
   
