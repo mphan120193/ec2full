@@ -1,0 +1,62 @@
+version: "3.8" 
+
+
+services:
+  redis:
+    image: redis:latest
+    container_name: my-redisV2
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    
+
+
+
+  backend:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - DB_HOST=host.docker.internal
+    secrests:
+      - PORT
+      - MONGO_URI
+      - JWT_SECRET
+      - JWT_REFRESH_SECRET
+      - EMAIL_USER
+      - EMAIL_PASS
+      - CONFIRM_URL
+    ports:
+      - 8000:8000
+    
+    
+  
+  nginx:
+    build: 
+        context: .
+      
+        
+    ports:
+      - 80:80
+    volumes:
+      - ../../frontend/dist:/usr/share/nginx/html
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    
+secrets:
+  PORT:
+    file: /home/ubuntu/secrets/be_PORT.secret
+  MONGO_URI:
+    file: /home/ubuntu/secrets/be_MONGO_URI.secret
+  JWT_SECRET:
+    file: /home/ubuntu/secrets/be_JWT_SECRET.secret
+  JWT_REFRESH_SECRET:
+    file: /home/ubuntu/secrets/be_JWT_REFRESH_SECRET.secret
+  EMAIL_USER:
+    file: /home/ubuntu/secrets/be_EMAIL_USER.secret
+  EMAIL_PASS:
+    file: /home/ubuntu/secrets/be_EMAIL_PASS.secret
+  CONFIRM_URL:
+    file: /home/ubuntu/secrets/be_CONFIRM_URL.secret
+    
+# run command:  docker compose -p containerName up -d
