@@ -19,7 +19,7 @@ services:
     restart: unless-stopped
     environment:
       - DB_HOST=host.docker.internal
-    secrests:
+    secrets:
       - PORT
       - MONGO_URI
       - JWT_SECRET
