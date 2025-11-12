@@ -34,7 +34,7 @@ const whitelist = ['https://www.yoursite.com',
 'http://localhost',
 'http://localhost:80',
 'http://127.0.0.1',
-'http://127.0.0.1:80',];
+'http://127.0.0.1:80', 'http://54.242.104.208','http://54.242.104.208:80',];
 const corsOptions={
     origin: (origin, callback)=>{
         if(whitelist.lastIndexOf(origin) !==-1 || !origin){
