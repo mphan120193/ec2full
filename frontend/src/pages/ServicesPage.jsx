@@ -10,7 +10,7 @@ import ServicesImg from '../assets/images/dentalservices_img.jpg';
 import GeneralImg from '../assets/images/generaldentistry_img.jpg';
 import CosmeticImg from '../assets/images/cosmeticdentistry_img.jpg';
 import RestorativeImg from '../assets/images/restorativedentistry_img.jpg';
-import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
+//import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
 
 
 
@@ -27,7 +27,7 @@ import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
 
 
 const ServicesPage = () => {
-    useAutoRefreshToken();
+    //useAutoRefreshToken();
     const generalRef = useRef(null);
     const cosmeticRef = useRef(null);
     const restorativeRef = useRef(null);

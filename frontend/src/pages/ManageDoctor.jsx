@@ -1,5 +1,5 @@
 import './ManageDoctor.scss';
-import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
+//import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
 import { Container, Form } from 'react-bootstrap';
 import Header from '../components/Header';
 import Row from 'react-bootstrap/Row';
@@ -32,7 +32,7 @@ import { useGetDoctorDetailByIDMutation } from '../slices/doctorApiSlice';
 
 
 const ManageDoctor = () => {
-    useAutoRefreshToken();
+    //useAutoRefreshToken();
     const price = useRef([]);
     const paymentMethod = useRef([]);
     

@@ -4,7 +4,7 @@ import HomeHeader from '../components/HomeHeader';
 import Homefooter from '../components/Homefooter';
 import { useParams } from 'react-router-dom';
 
-import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
+//import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
 
 import { Container, Row, Col, Card, ListGroup, Badge, Alert, Spinner } from 'react-bootstrap';
 import { FaUserCircle, FaEnvelope, FaPhone, FaCalendarAlt } from 'react-icons/fa';
@@ -20,7 +20,7 @@ import {ROLES_LIST} from '../utils/roles_list';
 
 
 const ProfilePage = () => {
-    useAutoRefreshToken();
+    //useAutoRefreshToken();
     const { id: userID } = useParams();
     
 

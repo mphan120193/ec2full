@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
+//import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
 
 import { useLogoutMutation } from '../redux/api';
 
@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 
 const Dashboard = () => {
 
-  useAutoRefreshToken();
+  //useAutoRefreshToken();
 
   const [message, setMessage] = useState('');
   const [logOut] = useLogoutMutation();

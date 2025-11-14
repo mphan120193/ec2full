@@ -7,12 +7,12 @@ import { useGetAllCodeQuery } from '../slices/userApiSlice';
 import { useRegisterWImageMutation } from '../slices/userApiSlice';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
-import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
+//import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
 
 
 const CreateNewUser = () => {
     
-    useAutoRefreshToken();
+    //useAutoRefreshToken();
     
     const navigate = useNavigate();
     const [email, setEmail] = useState('');

@@ -3,7 +3,7 @@ import './UserManageScreen.scss';
 import Table from 'react-bootstrap/Table';
 import { Container, Form } from 'react-bootstrap';
 import plusIcon from '../assets/images/plus-solid.svg';
-import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
+//import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
 
 
 import {
@@ -27,7 +27,7 @@ import { ROLES_LIST } from '../utils/roles_list';
 const UserManageScreen = () => {
 
 
-    useAutoRefreshToken();
+    //useAutoRefreshToken();
     const userRole = useSelector((state) => state.auth.userInfo.roles);
 
     const navigate = useNavigate();

@@ -7,7 +7,7 @@ import Homefooter from '../components/Homefooter';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import newPatientImg from '../assets/images/newpatients_img.jpg';
-import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
+//import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
 
 
 
@@ -25,7 +25,7 @@ import { useAutoRefreshToken } from '../utils/useAutoRefreshToken.js';
 
 const NewPatientsPage = () => {
 
-    useAutoRefreshToken();
+    //useAutoRefreshToken();
     const navigate = useNavigate();
     
     
