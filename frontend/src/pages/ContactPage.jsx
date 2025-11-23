@@ -42,7 +42,7 @@ const ContactPage = () => {
             <div className='contact-page-content'>
 
 
-                <div className='title text-center'>CONTACT</div>
+            <h2 className="text-center mb-5 bg-primary text-white rounded fs-1">CONTACT</h2>
 
 
                 <Row>

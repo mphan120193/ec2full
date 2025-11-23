@@ -1,197 +1,342 @@
-import './Homefooter.scss'
-import React from "react";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { Button, Container } from 'react-bootstrap';
+// import './Homefooter.scss'
+// import React from "react";
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
+// import { Button, Container } from 'react-bootstrap';
 
-import logoImage from '/Logo.png';
-import { useState } from 'react';
-import { useCreateGetInTouchMessageMutation } from '../slices/userApiSlice';
-import { toast } from 'react-toastify';
+// import logoImage from '/Logo.png';
+// import { useState } from 'react';
+// import { useCreateGetInTouchMessageMutation } from '../slices/userApiSlice';
+// import { toast } from 'react-toastify';
 
-import {
-    useGetInTouchSendConfirmEmailMutation,
-} from '../slices/userApiSlice';
-
-
-const Homefooter = () => {
-
-    const [name, setName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
-    const [createMessage] = useCreateGetInTouchMessageMutation();
-
-    const [sendConfirmEmail] = useGetInTouchSendConfirmEmailMutation();
-
-    const handleSubmit = async () => {
+// import {
+//     useGetInTouchSendConfirmEmailMutation,
+// } from '../slices/userApiSlice';
 
 
-        try {
-            let resMessage = await createMessage({ name, phoneNumber, email, message });
-            console.log(resMessage);
-            setName('');
-            setPhoneNumber('');
-            setEmail('');
-            setMessage('');
+// const Homefooter = () => {
 
-            const emailDetails = {
-                to: 'mphan120193@gmail.com',
-                subject: 'Get In Touch Email from Front End',
-                message: "Hello",
-                messageDetail: { name, phoneNumber, email, message },
-                responseDetail: resMessage.data.messageRes,
-            }
+//     const [name, setName] = useState('');
+//     const [phoneNumber, setPhoneNumber] = useState('');
+//     const [email, setEmail] = useState('');
+//     const [message, setMessage] = useState('');
+//     const [createMessage] = useCreateGetInTouchMessageMutation();
+
+//     const [sendConfirmEmail] = useGetInTouchSendConfirmEmailMutation();
+
+//     const handleSubmit = async () => {
 
 
+//         try {
+//             let resMessage = await createMessage({ name, phoneNumber, email, message });
+//             console.log(resMessage);
+//             setName('');
+//             setPhoneNumber('');
+//             setEmail('');
+//             setMessage('');
 
-            sendConfirmEmail(emailDetails);
-            toast.success('Success to send the message');
+//             const emailDetails = {
+//                 to: 'mphan120193@gmail.com',
+//                 subject: 'Get In Touch Email from Front End',
+//                 message: "Hello",
+//                 messageDetail: { name, phoneNumber, email, message },
+//                 responseDetail: resMessage.data.messageRes,
+//             }
 
 
 
-
-        } catch (e) {
-            console.log(e);
-        }
-
-
-
-    }
-
-    return (
-        <div className="home-footer-section">
-
-            <div className='get-in-touch-section'>
-                <Container>
-                    <div className='title text-center custom-title'>Get In Touch With Us Today</div>
-
-                    <Row className='get-in-touch-custom-row'>
-                        <Col className='custom-Col'>
-                            <div className='custom-input'>
-                                <input type='text' placeholder='Name*' value={name} onChange={(e) => setName(e.target.value)}></input>
-
-                            </div>
+//             sendConfirmEmail(emailDetails);
+//             toast.success('Success to send the message');
 
 
 
 
-                        </Col>
-                        <Col className='custom-Col'>
-                            <div className='custom-input'>
-                                <input type='text' placeholder='Phone*' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}></input>
-
-                            </div>
+//         } catch (e) {
+//             console.log(e);
+//         }
 
 
 
-                        </Col>
+//     }
 
-                    </Row>
-                    <Row className='get-in-touch-custom-row'>
-                        <Col>
-                            <div className='custom-input'>
-                                <input type='email' placeholder='Email*' value={email} onChange={(e) => setEmail(e.target.value)}></input>
+//     return (
+//         <div className="home-footer-section">
 
-                            </div>
-                        </Col>
-                        <Col></Col>
+//             <div className='get-in-touch-section'>
+//                 <Container>
+//                     <div className='title text-center custom-title'>Get In Touch With Us Today</div>
 
-                    </Row>
-                    <Row className='get-in-touch-custom-row'>
-                        <Col>
-                            <div className='custom-input'>
-                                <input type='text' placeholder='Message*' value={message} onChange={(e) => setMessage(e.target.value)}></input>
+//                     <Row className='get-in-touch-custom-row'>
+//                         <Col className='custom-Col'>
+//                             <div className='custom-input'>
+//                                 <input type='text' placeholder='Name*' value={name} onChange={(e) => setName(e.target.value)}></input>
 
-                            </div>
-                        </Col>
-
-
-                    </Row>
-                    <div className='get-in-touch-message-section'>
-                        Please use this form for general information purposes only. DO NOT send personal health information through this form.
-                        Specific patient care must be addressed during your appointment.
-                    </div>
-                    <div className='text-center'>
-                        <Button variant="secondary" onClick={handleSubmit}>SUBMIT</Button>
-                    </div>
-
-                </Container>
-            </div>
-
-            {/* <div className='maps-section'>
-                <iframe
-                    title='maps'
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7056.945343824706!2d-82.64972508855168!3d27.82599822014792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2e6aa60fc761b%3A0x7e2296a04781c9cd!2s5918%20Dr%20M.L.K.%20Jr%20St%20N%2C%20St.%20Petersburg%2C%20FL%2033703!5e0!3m2!1sen!2sus!4v1749179516014!5m2!1sen!2sus"
-
-                    width="100%" 
-                    height="100%"
-                    style={{ border: 0 }} 
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+//                             </div>
 
 
 
-            </div> */}
+
+//                         </Col>
+//                         <Col className='custom-Col'>
+//                             <div className='custom-input'>
+//                                 <input type='text' placeholder='Phone*' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}></input>
+
+//                             </div>
 
 
-            <div className='contact-infor-section'>
-                <Container>
-                    <Row className='custom-row'>
-                        <Col className='d-flex'>
-                            <div className='logo'>
-                                <img className='image' src={logoImage} alt='logo'></img>
-                            </div>
+
+//                         </Col>
+
+//                     </Row>
+//                     <Row className='get-in-touch-custom-row'>
+//                         <Col>
+//                             <div className='custom-input'>
+//                                 <input type='email' placeholder='Email*' value={email} onChange={(e) => setEmail(e.target.value)}></input>
+
+//                             </div>
+//                         </Col>
+//                         <Col></Col>
+
+//                     </Row>
+//                     <Row className='get-in-touch-custom-row'>
+//                         <Col>
+//                             <div className='custom-input'>
+//                                 <input type='text' placeholder='Message*' value={message} onChange={(e) => setMessage(e.target.value)}></input>
+
+//                             </div>
+//                         </Col>
+
+
+//                     </Row>
+//                     <div className='get-in-touch-message-section'>
+//                         Please use this form for general information purposes only. DO NOT send personal health information through this form.
+//                         Specific patient care must be addressed during your appointment.
+//                     </div>
+//                     <div className='text-center'>
+//                         <Button variant="secondary" onClick={handleSubmit}>SUBMIT</Button>
+//                     </div>
+
+//                 </Container>
+//             </div>
+
+//             {/* <div className='maps-section'>
+//                 <iframe
+//                     title='maps'
+//                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7056.945343824706!2d-82.64972508855168!3d27.82599822014792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2e6aa60fc761b%3A0x7e2296a04781c9cd!2s5918%20Dr%20M.L.K.%20Jr%20St%20N%2C%20St.%20Petersburg%2C%20FL%2033703!5e0!3m2!1sen!2sus!4v1749179516014!5m2!1sen!2sus"
+
+//                     width="100%" 
+//                     height="100%"
+//                     style={{ border: 0 }} 
+//                     allowFullScreen=""
+//                     loading="lazy"
+//                     referrerPolicy="no-referrer-when-downgrade"
+//                 ></iframe>
+
+
+
+//             </div> */}
+
+
+//             <div className='contact-infor-section'>
+//                 <Container>
+//                     <Row className='custom-row'>
+//                         <Col className='d-flex'>
+//                             <div className='logo'>
+//                                 <img className='image' src={logoImage} alt='logo'></img>
+//                             </div>
                             
 
-                        </Col>
-                        <Col className='phone-address-col'>
-                            <div className='phone-number'>
-                                (727)-310-8596
+//                         </Col>
+//                         <Col className='phone-address-col'>
+//                             <div className='phone-number'>
+//                                 (727)-310-8596
 
-                            </div>
-                            <div className='address'>
-                                5918 DR M.L.K Jr St N St.Petersburg, FL 33703
-                            </div>
-                        </Col>
-                        <Col className='business-hour-col'>
-                            <div className='business-hour'>
-                                Mon-Thu 8:00 AM – 5:00 PM <br></br>
-                                Fri 8:00 AM – 12:00 PM <br></br>
-                                Sat-Sun – Closed <br></br>
-                                Same-Day Appointments Available
-                            </div>
-                        </Col>
-                    </Row>
+//                             </div>
+//                             <div className='address'>
+//                                 5918 DR M.L.K Jr St N St.Petersburg, FL 33703
+//                             </div>
+//                         </Col>
+//                         <Col className='business-hour-col'>
+//                             <div className='business-hour'>
+//                                 Mon-Thu 8:00 AM – 5:00 PM <br></br>
+//                                 Fri 8:00 AM – 12:00 PM <br></br>
+//                                 Sat-Sun – Closed <br></br>
+//                                 Same-Day Appointments Available
+//                             </div>
+//                         </Col>
+//                     </Row>
 
-                </Container>
+//                 </Container>
 
 
+//             </div>
+
+
+
+
+
+//             <div className='copy-right-section'>
+//                 <p>&copy; SunShine Dental | Sitemap | Accessibility | Website by Hao Phan
+//                     {/* <a href='https://www.youtube.com/watch?v=147SkAVXEqM&t=120s' target="_blank" > &#8594; Click here &#8592;</a> */}
+//                 </p>
+
+//             </div>
+
+
+
+
+
+//         </div>
+
+
+
+//     );
+
+
+// }
+// export default Homefooter;
+
+
+import React, { useState } from "react";
+import { Container, Row, Col, Form, Button, Card, Image } from "react-bootstrap";
+import logoImage from "/Logo.png";
+import { useCreateGetInTouchMessageMutation, useGetInTouchSendConfirmEmailMutation } from "../slices/userApiSlice";
+import { toast } from "react-toastify";
+
+export default function Homefooter() {
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [createMessage] = useCreateGetInTouchMessageMutation();
+  const [sendConfirmEmail] = useGetInTouchSendConfirmEmailMutation();
+
+  const handleSubmit = async () => {
+    try {
+      const resMessage = await createMessage({ name, phoneNumber, email, message });
+
+      const emailDetails = {
+        to: "mphan120193@gmail.com",
+        subject: "Get In Touch Email from Front End",
+        message: "Hello",
+        messageDetail: { name, phoneNumber, email, message },
+        responseDetail: resMessage.data.messageRes,
+      };
+
+      sendConfirmEmail(emailDetails);
+      toast.success("Message sent successfully");
+
+      setName("");
+      setPhoneNumber("");
+      setEmail("");
+      setMessage("");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    <div className="bg-light pt-5">
+      <Container className="pb-5">
+        <h2 className="fw-bold text-center mb-4">Get In Touch With Us Today</h2>
+
+        <Card className="shadow-sm border-0 p-4 mb-5">
+          <Form>
+            <Row className="g-3">
+              <Col md={6}>
+                <Form.Control
+                  type="text"
+                  placeholder="Name*"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Col>
+              <Col md={6}>
+                <Form.Control
+                  type="text"
+                  placeholder="Phone*"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+              </Col>
+            </Row>
+
+            <Row className="g-3 mt-1">
+              <Col md={6}>
+                <Form.Control
+                  type="email"
+                  placeholder="Email*"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Col>
+            </Row>
+
+            <Row className="g-3 mt-1">
+              <Col>
+                <Form.Control
+                  type="text"
+                  placeholder="Message*"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </Col>
+            </Row>
+
+            <p className="text-muted small mt-3">
+              Please use this form for general information purposes only. DO NOT send personal
+              health information through this form. Specific patient care must be addressed during
+              your appointment.
+            </p>
+
+            <div className="text-center mt-3">
+              <Button variant="secondary" onClick={handleSubmit}>
+                SUBMIT
+              </Button>
             </div>
+          </Form>
+        </Card>
+      </Container>
 
+      <div style={{ width: "100%", height: "350px" }} className="mx-4">
+        <iframe
+          title="maps"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7056.945343824706!2d-82.64972508855168!3d27.82599822014792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2e6aa60fc761b%3A0x7e2296a04781c9cd!2s5918%20Dr%20M.L.K.%20Jr%20St%20N%2C%20St.%20Petersburg%2C%20FL%2033703!5e0!3m2!1sen!2sus!4v1749179516014!5m2!1sen!2sus"
+          width="90%"
+          height="90%"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
 
+      <Container className="py-5">
+        <Row className="align-items-center g-4 text-center text-md-start">
+          <Col md={4}>
+            <Image src={logoImage} alt="logo" fluid style={{ maxWidth: "180px" }} />
+          </Col>
 
-
-
-            <div className='copy-right-section'>
-                <p>&copy; SunShine Dental | Sitemap | Accessibility | Website by Hao Phan
-                    {/* <a href='https://www.youtube.com/watch?v=147SkAVXEqM&t=120s' target="_blank" > &#8594; Click here &#8592;</a> */}
-                </p>
-
+          <Col md={4}>
+            <div className="fw-bold fs-5">(727)-310-8596</div>
+            <div className="text-muted">
+              5918 DR M.L.K Jr St N<br />St. Petersburg, FL 33703
             </div>
+          </Col>
 
+          <Col md={4}>
+            <div className="text-muted">
+              Mon-Thu 8:00 AM – 5:00 PM<br />Fri 8:00 AM – 12:00 PM<br />Sat-Sun – Closed<br />Same-Day Appointments Available
+            </div>
+          </Col>
+        </Row>
+      </Container>
 
-
-
-
-        </div>
-
-
-
-    );
-
-
+      <div className="bg-dark text-white text-center py-3">
+        <p className="mb-0 small">© SunShine Dental | Sitemap | Accessibility | Website by Minh Phan</p>
+      </div>
+    </div>
+  );
 }
-export default Homefooter;
+

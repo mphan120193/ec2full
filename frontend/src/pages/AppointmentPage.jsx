@@ -347,7 +347,8 @@ const AppointmentPage = () => {
                 <div className='appointment-content'>
 
 
-                    <div className='title text-center'>APPOINTMENT</div>
+                    
+                <h2 className="text-center mb-5 bg-primary text-white rounded fs-1">APPOINTMENTS</h2>
 
 
 
@@ -398,13 +399,7 @@ const AppointmentPage = () => {
 
                                                 Select Date
                                             </Button>
-                                            {/* <DayPicker
-                                        mode="single"
-                                        selectedDate={selectedDate}
-                                        onSelect={handleDateSelect}
-                                        disabled={{ before: today }}
-
-                                    /> */}
+                                            
                                             {isVisible && (
                                                 <div>
                                                     <DayPicker
@@ -522,26 +517,6 @@ const AppointmentPage = () => {
                             Submit
                         </Button>
                     </Form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 </div>
 

@@ -204,7 +204,7 @@ const ManageDoctorSchedule = () => {
                 <div className='schedule-list-table'>
                     <div className='title text-center mb-4'><h2>Appointment Schedule</h2></div>
 
-                    <Table striped bordered hover>
+                    <Table striped bordered hover responsive>
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -221,7 +221,7 @@ const ManageDoctorSchedule = () => {
                                 console.log(item);
                                 return (
                                     <tr key={item._id}>
-                                        <td>{index}</td>
+                                        <td>{index +1}</td>
                                         <td>{item.name}</td>
                                         <td>{item.email}</td>
                                         <td>{item.phoneNmber}</td>

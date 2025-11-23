@@ -20,53 +20,7 @@ function ControlledCarousel() {
 
     return (
 
-        // <Carousel activeIndex={index} onSelect={handleSelect} className='custom-carousel'>
-
-        //     <Carousel.Item className="custom-carousel-item">
-
-
-
-        //         <div className="image-wrapper">
-        //             <ExampleCarouselImage text="First slide" />
-
-        //             <div className='detail-infor'>
-        //                 <h1>We Welcome New <br></br> Patients</h1>
-        //                 <p>We invite you to contact us to discuss your dental care <br></br>
-        //                     Please don't hesitate to call us at (727)-310-8596</p> 
-        //                 <div><Button variant="secondary" className='mb-2'onClick={()=>{navigate('/new-patients'); window.scrollTo(0, 0);}}>Read More</Button></div>
-
-        //             </div>
-        //             <div></div>
-
-
-
-        //         </div>
-        //     </Carousel.Item>
-        //     <Carousel.Item className="custom-carousel-item">
-
-
-
-        //         <div className="image-wrapper">
-        //             <ExampleCarouselImage text="Second slide" />
-
-        //             <div className='detail-infor'>
-        //                 <h1>Request An Appointment <br></br> Today!</h1>
-
-        //                 <p>Quickly and easily request online appointment
-        //                     today!</p>
-
-        //                 <div><Button variant="secondary" className='mb-2' onClick={()=>{navigate('/appointment'); window.scrollTo(0, 0);}}>REQUEST APPOINTMENT </Button></div>
-
-        //             </div>
-
-
-
-
-
-        //         </div>
-        //     </Carousel.Item>
-
-        // </Carousel>
+        
 
         <Carousel activeIndex={index} onSelect={handleSelect} className='sunshine-carousel'>
 

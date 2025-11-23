@@ -105,7 +105,7 @@ const getAllCode = async (req, res) => {
 
   if (inputType) {
 
-    const allcode = await Allcodes.find({ type: inputType });
+    const allcode = await Allcodes.find({ type: inputType }).sort({ key: 1 });
 
     res.status(200).json({ allcode });
 
