@@ -10,8 +10,12 @@ import { Container, Row, Col, Card, ListGroup, Badge, Alert, Spinner } from 'rea
 import { FaUserCircle, FaEnvelope, FaPhone, FaCalendarAlt } from 'react-icons/fa';
 
 import { useGetAllUserQuery, useGetAppointmentByUserIDQuery } from '../slices/userApiSlice';
+import {useGetDoctorListQuery} from '../slices/doctorApiSlice';
+
 
 import {ROLES_LIST} from '../utils/roles_list';
+import {TIME_LIST} from '../utils/code_list';
+import {STATUS_LIST} from '../utils/code_list';
 
 
 
@@ -42,7 +46,28 @@ const ProfilePage = () => {
 
     const userInfo = userDataArray?.[0] || null;
     const appointments = appointmentListResponse || [];
+    const { data: doctorArrList, isLoading, isError, error } = useGetDoctorListQuery();
 
+    let doctorNameList={}
+    if(doctorArrList?.data){
+
+        doctorNameList = doctorArrList?.data.reduce((accumulator, currentItem) => {
+            // 1. Get the dynamic key (convert id to string to match your example format)
+            const key = String(currentItem._id);
+            
+            // 2. Assign the name (value) to the new dynamic key in the accumulator
+            accumulator[key] = currentItem.firstName;
+            
+            // 3. Return the accumulator for the next iteration
+            return accumulator;
+          }, {});
+          
+
+    }
+
+    
+
+    
 
     
     const overallLoading = isUserLoading || isLoadingAppointments;
@@ -103,7 +128,7 @@ const ProfilePage = () => {
         <>
         <HomeHeader/>
         <Container className="my-5 profile-container">
-            <h2 className="text-center mb-4 profile-heading">User Profile</h2>
+            <h2 className="text-center mb-4 profile-heading">{userInfo.firstName} Profile</h2>
             <Row className="justify-content-center">
                 <Col md={8} lg={6}>
                     <Card className="shadow-lg profile-card">
@@ -111,7 +136,7 @@ const ProfilePage = () => {
                             <div className="text-center mb-4">
                                 <FaUserCircle size={80} className="text-primary profile-avatar" />
                                 <h3 className="mt-3">{userInfo.firstName} {userInfo.lastName}</h3>
-                                {/* Using optional chaining for roles in case it's not always present */}
+                                
                                 <p className="text-muted">{roleNames || 'Patient'}</p>
                             </div>
 
@@ -145,7 +170,7 @@ const ProfilePage = () => {
                             
                         </Card.Header>
                         <Card.Body>
-                            {/* Appointments specific loading/error states (though overall should catch most) */}
+                            
                             {isLoadingAppointments ? (
                                 <div className="text-center">
                                     <Spinner animation="border" role="status" className="text-primary" />
@@ -155,27 +180,28 @@ const ProfilePage = () => {
                                 <Alert variant="danger" className="text-center">
                                     Error loading appointments: {appointmentsError?.data?.message || appointmentsError?.error || 'Unknown error'}
                                 </Alert>
-                            ) : appointments.length === 0 ? ( // Check .length directly here
+                            ) : appointments.length === 0 ? ( 
                                 <Alert variant="info" className="text-center">
                                     You have no appointments.
                                 </Alert>
                             ) : (
                                 <ListGroup variant="flush">
                                     {appointments.map((appointment) => (
-                                        // Use appointment.id first, fallback to _id if needed for key
+                                        
                                         <ListGroup.Item key={appointment.id || appointment._id} className="d-flex justify-content-between align-items-center appointment-item">
                                             <div>
-                                                <strong>{appointment.date} at {appointment.timeType}</strong>
+                                                <strong>{appointment.date} at {TIME_LIST[appointment.timeType]}</strong>
                                                 <br />
-                                                {/* Assuming doctorID might need to be translated to a name later if not directly provided */}
-                                                <small className="text-muted">Doctor ID: {appointment.doctorID}</small>
+                                                
+                                                <small>Doctor Name: <span className='fw-bold'>{doctorNameList[appointment.doctorID].toUpperCase()}</span></small>
+                                                
                                                 <br />
                                                 <small className="text-muted">Message: {appointment.message}</small>
                                             </div>
                                             <div>
-                                                {/* Status mapping, adjust 'S2', 'S1' to your actual status codes */}
+                                                
                                                 <Badge bg={appointment.statusID === 'S2' ? 'success' : appointment.statusID === 'S1' ? 'warning' : 'danger'}>
-                                                    {appointment.statusID.toUpperCase()}
+                                                    {STATUS_LIST[appointment.statusID.toUpperCase()]}
                                                 </Badge>
                                             </div>
                                         </ListGroup.Item>

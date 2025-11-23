@@ -1,59 +1,51 @@
 
-import React from 'react';
-import { Container, Card, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import './Welcome.css';
-import logoImage from '/Logo.png';
+import React from "react";
+import { Container, Card, Button, Image } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import logoImage from "/Logo.png";
 
+export default function WelcomeScreen() {
+  const navigate = useNavigate();
 
+  return (
+    <div className="d-flex align-items-center justify-content-center py-5 bg-light" style={{ minHeight: "100vh" }}>
+      <Container className="px-3">
+        <Card className="shadow-lg rounded-4 border-0 mx-auto" style={{ maxWidth: "600px" }}>
+          <Card.Body className="p-4 text-center">
+            <Image
+              src={logoImage}
+              alt="Sunshine Dental Care Logo"
+              fluid
+              className="mb-4"
+              style={{ maxWidth: "260px" }}
+            />
 
-const WelcomeScreen = () => {
-    const navigate = useNavigate();
-    
+            <h1 className="fw-bold mb-3">Welcome to Sunshine Dental Care</h1>
+            <p className="text-muted mb-4">
+              Your brighter smile starts here. Experience gentle, comprehensive dental care.
+            </p>
 
-    
+            <div className="d-grid gap-3 mx-auto" style={{ maxWidth: "350px" }}>
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => navigate("/login")}
+              >
+                Sign In to Your Account
+              </Button>
 
-    return (
-        <div className="welcome-screen-wrapper d-flex align-items-center justify-content-center py-5">
-            <Container className="welcome-container">
-                <Card className="welcome-card shadow-lg border-0 rounded-4">
-                    <Card.Body className="p-5 text-center">
-                        
-                        <img
-                            src={logoImage} 
-                            alt="Sunshine Dental Care Logo"
-                            className="mb-4 welcome-logo"
-                            style={{ maxWidth: '320px', height: 'auto' }} 
-                        />
+              <Button
+                variant="outline-secondary"
+                size="lg"
+                onClick={() => navigate("/register")}
+              >
+                Register Now
+              </Button>
+            </div>
+          </Card.Body>
+        </Card>
+      </Container>
+    </div>
+  );
+}
 
-                        <h1 className="welcome-title mb-3">Welcome to Sunshine Dental Care</h1>
-                        <p className="welcome-subtitle text-muted mb-5">
-                            Your brighter smile starts here. Experience gentle, comprehensive dental care.
-                        </p>
-
-                        <div className="d-grid gap-3 col-md-8 mx-auto">
-                            <Button
-                                variant="primary"
-                                size="lg"
-                                className="welcome-button"
-                                onClick={() => { navigate('/login'); }}
-                            >
-                                Sign In to Your Account
-                            </Button>
-                            <Button
-                                variant="outline-secondary"
-                                size="lg"
-                                className="welcome-button"
-                                onClick={() => { navigate('/register'); }}
-                            >
-                                Register Now
-                            </Button>
-                        </div>
-                    </Card.Body>
-                </Card>
-            </Container>
-        </div>
-    );
-};
-
-export default WelcomeScreen;

@@ -1,136 +1,127 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Form, Button, Card, Container } from 'react-bootstrap';
-import { toast } from 'react-toastify';
-import { useRegisterMutation } from '../slices/userApiSlice';
-import './RegisterScreen.css';
+
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Form, Button, Card, Container, Image } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { useRegisterMutation } from "../slices/userApiSlice";
 import logoImage from '/Logo.png';
 
+export default function RegisterScreen() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-const RegisterScreen = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+  const [register] = useRegisterMutation();
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
 
-    const navigate = useNavigate();
-    const [register] = useRegisterMutation(); 
-    const submitHandler = async (e) => {
-        e.preventDefault();
+    try {
+      await register({ firstName, lastName, email, password }).unwrap();
+      navigate("/login");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
+  return (
+    <div className="d-flex align-items-center justify-content-center py-5 bg-light" style={{ minHeight: "100vh" }}>
+      <Container className="px-3">
+        <Card className="shadow-lg rounded-4 border-0 mx-auto" style={{ maxWidth: "600px" }}>
+          <Card.Body className="p-4 text-center">
+            <Image
+              src={logoImage}
+              alt="Sunshine Dental Care Logo"
+              fluid
+              className="mb-4"
+              style={{ maxWidth: "240px" }}
+            />
 
+            <h1 className="fw-bold mb-3">Create Your Account</h1>
+            <p className="text-muted mb-4">Join Sunshine Dental Care today.</p>
 
+            <Form onSubmit={submitHandler} className="text-start">
+              <Form.Group className="mb-3" controlId="firstName">
+                <Form.Control
+                  type="text"
+                  placeholder="Enter first name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  size="lg"
+                  required
+                />
+              </Form.Group>
 
-        if (password !== confirmPassword) {
-            toast.error('Passwords do not match');
-            return;
-        }
+              <Form.Group className="mb-3" controlId="lastName">
+                <Form.Control
+                  type="text"
+                  placeholder="Enter last name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  size="lg"
+                  required
+                />
+              </Form.Group>
 
-        try {
-            const res = await register({ firstName, lastName, email, password }).unwrap();
+              <Form.Group className="mb-3" controlId="email">
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  size="lg"
+                  autoComplete="email"
+                  required
+                />
+              </Form.Group>
 
-            navigate('/login');
-        } catch (err) {
-            toast.error(err?.data?.message || err.error);
-        }
-    };
+              <Form.Group className="mb-3" controlId="password">
+                <Form.Control
+                  type="password"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  size="lg"
+                  autoComplete="new-password"
+                  required
+                />
+              </Form.Group>
 
-    return (
-        <div className='register-screen-wrapper d-flex align-items-center justify-content-center py-5'>
-            <Container className='register-container'>
-                <Card className='register-card shadow-lg border-0 rounded-4'>
-                    <Card.Body className='p-5 text-center'>
+              <Form.Group className="mb-4" controlId="confirmPassword">
+                <Form.Control
+                  type="password"
+                  placeholder="Confirm password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  size="lg"
+                  autoComplete="new-password"
+                  required
+                />
+              </Form.Group>
 
-                        <img
-                            src={logoImage}
-                            alt="Sunshine Dental Care Logo"
-                            className="mb-4 register-logo"
-                            style={{ maxWidth: '320px', height: 'auto' }}
-                        />
-                        <h1 className='register-title mb-4'>Create Your Account</h1>
-                        <p className='register-subtitle text-muted mb-4'>Join Sunshine Dental Care today.</p>
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                className="w-100"
+              >
+                Register
+              </Button>
+            </Form>
 
-                        <Form onSubmit={submitHandler}>
-                            <Form.Group className='mb-3' controlId='firstName'>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='Enter first name'
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                    className='form-control-lg'
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group className='mb-3' controlId='lastName'>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='Enter last name'
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
-                                    className='form-control-lg'
-                                    required
-                                />
-                            </Form.Group>
-
-                            <Form.Group className='mb-3' controlId='email'>
-                                <Form.Control
-                                    type='email'
-                                    placeholder='Enter email'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className='form-control-lg'
-                                    autoComplete='email'
-                                    required
-                                />
-                            </Form.Group>
-
-                            <Form.Group className='mb-3' controlId='password'>
-                                <Form.Control
-                                    type='password'
-                                    placeholder='Enter password'
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className='form-control-lg'
-                                    autoComplete='new-password'
-                                    required
-                                />
-                            </Form.Group>
-
-                            <Form.Group className='mb-4' controlId='confirmPassword'>
-                                <Form.Control
-                                    type='password'
-                                    placeholder='Confirm password'
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className='form-control-lg'
-                                    autoComplete='new-password'
-                                    required
-                                />
-                            </Form.Group>
-
-                            <Button
-                                type='submit'
-                                variant='primary'
-                                className='register-button w-100'
-                                size='lg'
-
-                            >
-                                Register
-                            </Button>
-                        </Form>
-
-                        <div className='mt-4 text-center'>
-                            <p className='text-muted'>
-                                Already have an account? <Link to='/login' className='login-link'>Sign In Here</Link>
-                            </p>
-                        </div>
-                    </Card.Body>
-                </Card>
-            </Container>
-        </div>
-    );
-};
-
-export default RegisterScreen;
+            <p className="mt-4 text-muted text-center">
+              Already have an account? <Link to="/login">Sign In Here</Link>
+            </p>
+          </Card.Body>
+        </Card>
+      </Container>
+    </div>
+  );
+}

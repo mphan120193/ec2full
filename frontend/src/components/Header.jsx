@@ -1,7 +1,4 @@
 
-
-import './Header.scss';
-
 import AdminNavbar from './AdminNavbar';
 import { useSelector } from 'react-redux';
 import DoctorNavbar from './DoctorNavbar';

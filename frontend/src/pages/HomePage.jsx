@@ -121,7 +121,7 @@ const HomePage = () => {
 
                     </div>
 
-                    <div className='about-us-section'>
+                    {/* <div className='about-us-section'>
                         <Container>
                             <Row className="d-flex justify-content-center">
 
@@ -151,7 +151,7 @@ const HomePage = () => {
 
                         </Container>
 
-                    </div>
+                    </div> */}
 
                     
                 </div>
