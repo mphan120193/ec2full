@@ -103,9 +103,9 @@ app.use('/api/doctor',verifyJWT, doctorRoutes);
 // });
 
 
-app.use('/api/protected', verifyJWT, (req, res) => {
-    res.json({ message: `Hello user ${req.userId}, this is protected.` });
-  });
+// app.use('/api/protected', verifyJWT, (req, res) => {
+//     res.json({ message: `Hello user ${req.userId}, this is protected.` });
+//   });
 
 
 
