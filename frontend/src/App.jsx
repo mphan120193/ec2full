@@ -93,7 +93,7 @@ function App() {
           <Route path={PATHS.CONFIRM_EMAIL} element={<ConfirmMail />} />
 
 
-          <Route path='' element={<ProtectedRoute />}>
+          <Route path='' element={<ProtectedAdminRoute />}>
           <Route path={PATHS.SYSTEM_USER_MANAGE} element={<UserManageScreen />} />
           <Route path={PATHS.SYSTEM_CREATE_NEW_USER} element={<CreateNewUser />} />
           <Route path={PATHS.SYSTEM_MANAGE_DOCTOR} element={<ManageDoctor />} />
