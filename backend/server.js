@@ -29,15 +29,13 @@ const app = express();
 app.use(logger);
 app.use(helmet());
 
-// Cross Origin Resource Sharing
-// Only allow the url in the whitelist to access the backend.
-// Remove the 'http://127.0.0.1:5500', 'http://localhost:8080' and || !origin on Production
+
 
 const whitelist = ['https://www.yoursite.com',
 'http://localhost',
 'http://localhost:80',
 'http://127.0.0.1',
-'http://127.0.0.1:80',];
+'http://127.0.0.1:80', 'http://3.84.212.103','http://3.84.212.103:80'];
 const corsOptions={
     origin: (origin, callback)=>{
         if(whitelist.lastIndexOf(origin) !==-1 || !origin){
@@ -97,15 +95,7 @@ app.use('/api/doctor',verifyJWT, doctorRoutes);
 
 
 
-// Protected with JWT and Role  example
-// app.use('/api/protected', verifyJWT, verifyRoles(ROLES_LIST.Amdin), (req, res) => {
-//   res.json({ message: `Hello user ${req.userId}, this is protected.` });
-// });
 
-
-// app.use('/api/protected', verifyJWT, (req, res) => {
-//     res.json({ message: `Hello user ${req.userId}, this is protected.` });
-//   });
 
 
 
