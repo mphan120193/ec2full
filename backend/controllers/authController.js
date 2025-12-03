@@ -8,6 +8,7 @@ import DentalBooking from '../models/DentalBookingModel.js';
 import DoctorSchedule from '../models/doctorScheduleModel.js';
 import dotenv from 'dotenv';
 dotenv.config();
+import {TIME_LIST} from '../config/code_list.js';
 import fs from 'fs';
 const secretPath = '/run/secrets/CONFIRM_URL';
 if (fs.existsSync(secretPath)) {
@@ -389,9 +390,10 @@ const sendConfirmEmail = async (req, res)=>{
     let time=bookingDa.time;
     let date=bookingDa.date;
     let doctorID=bookingDa.doctorId;
+    const doctorFName = await User.find({ _id: doctorID }).select('firstName');
 
     const htmlContent = `<h1>Welcome!</h1><p> ${message} This is the confirm emal from 
-    Sunshine Dental. Your appointment is on ${date} at ${time} with doctor ${doctorID}</p>
+    Sunshine Dental. Your appointment is on ${date} at $${TIME_LIST[time]} with doctor ${doctorFName}</p>
     <br></br> Please click the link belove to confrim ... <br></br>
     <a href="${port}${bookingResult.confirmToken}&doctorID=${doctorID}" >Click Here</a>`
     ;
