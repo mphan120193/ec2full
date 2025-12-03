@@ -13,7 +13,7 @@ import { getAllusers, deleteUser, getAllCode, createUser, editUser,
     sendConfirmEmail, 
     verifyEmail, getAppointment } from '../controllers/authController.js';
 
-   
+import rateLimit from "express-rate-limit";  
 const router = express.Router();
 import fs from 'fs';
 
@@ -26,6 +26,19 @@ const secretPath1 = '/run/secrets/JWT_REFRESH_SECRET';
 if (fs.existsSync(secretPath)) {
     process.env.JWT_REFRESH_SECRET = fs.readFileSync(secretPath1, 'utf8').trim();
 }
+
+
+// ---- LOGIN LIMIT ----
+const loginLimiter = rateLimit({
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    max: 5, // only 5 login attempts
+    message: {
+      status: 429,
+      message: "Too many failed login attempts. Try again later.",
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
 
 
 
@@ -77,7 +90,7 @@ router.post('/register', async (req, res) => {
 
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', loginLimiter, async (req, res) => {
     const cookies = req.cookies;
     
     const { email, password } = req.body;

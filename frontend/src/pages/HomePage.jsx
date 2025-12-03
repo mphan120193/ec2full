@@ -121,37 +121,7 @@ const HomePage = () => {
 
                     </div>
 
-                    {/* <div className='about-us-section'>
-                        <Container>
-                            <Row className="d-flex justify-content-center">
-
-
-                                <Col>
-
-
-
-                                </Col>
-                                <Col>
-                                    <div className='about-us-title'>
-                                        About Our Office
-                                    </div>
-
-                                    <div className='about-us-text'>
-                                        SunShine Dental is proud to serve St. Petersburg, FL and surrounding areas. We are dedicated to providing the highest level of dental medicine along with friendly, compassionate service.
-                                        <br></br>
-                                        <br></br>
-
-                                        If you have any questions about how we can care for your teeth & mouth, please don’t hesitate to call us at<span className='phone-number'>(727) 527-4955</span> . Thank you!
-                                    </div>
-
-
-                                </Col>
-
-                            </Row>
-
-                        </Container>
-
-                    </div> */}
+                    
 
                     
                 </div>
