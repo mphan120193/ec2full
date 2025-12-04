@@ -14,6 +14,8 @@ import { getAllusers, deleteUser, getAllCode, createUser, editUser,
     verifyEmail, getAppointment } from '../controllers/authController.js';
 
 import rateLimit from "express-rate-limit";  
+import { registerUserValidator } from "../validators/userValidator.js";
+import { validate } from "../middlewares/validate.js";
 const router = express.Router();
 import fs from 'fs';
 
@@ -42,11 +44,12 @@ const loginLimiter = rateLimit({
 
 
 
-router.post('/register', async (req, res) => {
+router.post('/register', registerUserValidator, validate, async (req, res) => {
     
 
-    const { firstName, lastName, email, password,
-        address, phoneNumber, genderID, positionID } = req.body;
+    const { firstName, lastName, email, password
+         } = req.body;
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const userExists = await User.findOne({ email });
@@ -63,11 +66,8 @@ router.post('/register', async (req, res) => {
     lastName,
     email,
     password:hashedPassword,
-    address,
     roles,
-    phoneNumber,
-    genderID,
-    positionID,
+    
 
   });
 
