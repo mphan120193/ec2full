@@ -68,7 +68,7 @@ const ManageDoctor = () => {
     useEffect(() => {
 
         const fetchDoctorData = async () => {
-            console.log(selectedDoctor);
+            //console.log(selectedDoctor);
             setSelectedPrice('');
             setSelectedPayment('');
             
@@ -182,13 +182,13 @@ const ManageDoctor = () => {
 
     const handleSave = async (e) => {
         e.preventDefault();
-        console.log('selected doctor ID: ', selectedDoctor);
-        console.log('Doctor Description: ', description);
-        console.log('selected Price: ', selectedPrice);
-        console.log('Selected payment: ', selectedPayment);
-        console.log('Clinic Note: ', note);
-        console.log('markdown: ', markdown);
-        console.log('Content HTML: ', contentHTML);
+        // console.log('selected doctor ID: ', selectedDoctor);
+        // console.log('Doctor Description: ', description);
+        // console.log('selected Price: ', selectedPrice);
+        // console.log('Selected payment: ', selectedPayment);
+        // console.log('Clinic Note: ', note);
+        // console.log('markdown: ', markdown);
+        // console.log('Content HTML: ', contentHTML);
 
 
         try {

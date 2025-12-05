@@ -392,9 +392,14 @@ const sendConfirmEmail = async (req, res)=>{
     let doctorID=bookingDa.doctorId;
     const doctorInfo = await User.find({ _id: doctorID }).select('firstName');
 
-    const htmlContent = `<h1>Welcome!</h1><p> ${message} This is the confirm emal from 
-    Sunshine Dental. Your appointment is on ${date} at ${TIME_LIST[time]} with Doctor ${doctorInfo? doctorInfo[0].firstName: ''}</p>
-    <br></br> Please click the link belove to confrim ... <br></br>
+    const htmlContent = `<h1>Welcome!</h1>
+    <p> 
+    This is the confirm emal from Sunshine Dental. <br></br>
+     Your appointment is on ${date} at ${TIME_LIST[time]} with Doctor <h2> ${doctorInfo? doctorInfo[0].firstName: ''} </h2>
+     </p>
+    <br></br>
+    Your message to us ${message}  <br></br>
+    Please click the link belove to confrim ... <br></br>
     <a href="${port}${bookingResult.confirmToken}&doctorID=${doctorID}" >Click Here</a>`
     ;
     await sendEmail(to, subject, message, htmlContent);

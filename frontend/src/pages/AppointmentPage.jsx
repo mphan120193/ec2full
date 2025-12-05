@@ -88,10 +88,10 @@ const AppointmentPage = () => {
 
 
             if (selectedDate && selectedDoctor) {
-                console.log('useEffet check...')
-                console.log('select Date: ', selectedDate.toDateString());
-                console.log('Selected DoctorID ', selectedDoctor);
-                console.log('useRef nochange time: ', noChangeSchedule.current);
+                // console.log('useEffet check...')
+                // console.log('select Date: ', selectedDate.toDateString());
+                // console.log('Selected DoctorID ', selectedDoctor);
+                // console.log('useRef nochange time: ', noChangeSchedule.current);
                 let existingTime = [];
 
 
@@ -104,7 +104,7 @@ const AppointmentPage = () => {
                         };
 
                         const res = await getDetailSchedule(queryParams);
-                        console.log('Respone Data: ', res);
+                        
 
                         if (res) {
                             existingTime = res.data.existingTime;
@@ -294,16 +294,16 @@ const AppointmentPage = () => {
             message: message
         };
 
-        console.log('Booking Data:', bookingData);
+        
         let bookingResult = await booking(bookingData);
-        console.log(bookingResult);
+        
 
 
 
         const emailDetails = {
             to: 'mphan120193@gmail.com',
-            subject: 'Test Email from Front End',
-            message: "Hello",
+            subject: 'Sunshine Dental Care confirmation email',
+            message: bookingData.message,
             bookingDa: bookingData,
             bookingResult: bookingResult.data.result,
         }

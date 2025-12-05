@@ -5,6 +5,7 @@ import DoctorInfor from '../models/doctorInfoModel.js';
 import Markdown from '../models/markdownModel.js';
 import DentalBooking from '../models/DentalBookingModel.js';
 import doctorSchedule from '../models/doctorScheduleModel.js';
+import redisClient from '../config/redis.js';
 
 
 const getAllDoctors = async (req, res) => {
@@ -111,6 +112,7 @@ const getDoctorDetailById = async (req, res) => {
         })
     }
 }
+
 const saveDoctorInfor = async (req, res) => {
     const { id, description, content, contentHTML,
         price, payment, province, clinicName, clinicAddress, clinicNote } = req.body;
@@ -138,7 +140,8 @@ const saveDoctorInfor = async (req, res) => {
 
                 );
 
-                //res.status(200).json({ message: "Updated Markdown successfully!" })
+                
+                
             }
             else {
                 await Markdown.create(
@@ -150,7 +153,7 @@ const saveDoctorInfor = async (req, res) => {
 
 
                     });
-                //res.status(200).json({ message: "Markdown saved successfully!" })
+                
             }
 
             if (existingDoctorInfo) {
@@ -165,7 +168,8 @@ const saveDoctorInfor = async (req, res) => {
                 },
                     { new: true, runValidators: true });
 
-                //res.status(200).json({ message: "Updated Doctor Infor successfully!" });
+                
+                
 
             } else {
                 await DoctorInfor.create({
@@ -178,17 +182,25 @@ const saveDoctorInfor = async (req, res) => {
                     note: clinicNote
                 })
 
-                //res.status(200).json({ message: "New Doctor Infor successfully!" });
+                
             }
-
+            
+            
             res.status(200).json({ message: "Markdown saved successfully!" })
+            
         }
+
+        
+
+
 
 
 
     } catch (error) {
         res.status(500).json({ error: 'Error saving content' });
     }
+    
+
 
 }
 

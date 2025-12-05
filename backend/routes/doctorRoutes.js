@@ -30,7 +30,8 @@ const cacheDoctorDetails = async (req, res, next) => {
               res.sendResponse = res.send;
               res.send = async (body) => {
                 if (res.statusCode >= 200 && res.statusCode < 300 && typeof body === 'string') {
-                    await redisClient.set(cacheKey, body, { EX: 300 });
+                  //  cache data for 60s 
+                  await redisClient.set(cacheKey, body, { EX: 60 });
                   console.log(`Cache set for doctor ID: ${doctorId}`);
                 }
                 res.sendResponse(body);
@@ -47,6 +48,9 @@ const router = express.Router();
 
 router.get('/get-doctor-list', getAllDoctors);
 router.get('/get-doctor-detail-by-id',cacheDoctorDetails, getDoctorDetailById);
+
+
+
 router.post('/save-doctor-infor',  saveDoctorInfor);
 router.get('/get-schedule-list-by-doctorID-date', getScheduleListByDoctorIDAndDate);
 router.get('/get-schedule-detail-by-doctorID', getScheduleDetailByDoctorID);

@@ -32,7 +32,7 @@ const CustomerMessagePage = () => {
 
 
     const userRole = useSelector((state) => state.auth.userInfo.roles);
-    console.log(userRole);
+    
 
     const { data: messageArrList, isLoading, isError, error } = useGetAllMessageQuery();
 
@@ -125,7 +125,7 @@ const CustomerMessagePage = () => {
                     <div className="title text-center"><h1>Customer Message</h1></div>
 
 
-                    <Table striped bordered hover className="custom-table">
+                    <Table striped bordered hover responsive className="custom-table">
                         <thead >
                             <tr>
 
@@ -160,7 +160,7 @@ const CustomerMessagePage = () => {
                                             <td>{item.createdAt}</td>
 
                                             <td><button className='btn btn-primary px-3 mx-3' onClick={() => handleView(item)}>View</button>
-                                                <button className='btn btn-primary px-3' onClick={() => handleDelete(item._id)}>Delete</button>
+                                                {/* <button className='btn btn-primary px-3' onClick={() => handleDelete(item._id)}>Delete</button> */}
                                             </td>
                                         </tr>
 

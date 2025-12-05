@@ -55,9 +55,9 @@ const ManageDoctorSchedule = () => {
 
 
             if (selectedDate && selectedDoctor) {
-                console.log('useEffet check...')
-                console.log('select Date: ', selectedDate.toDateString());
-                console.log('Selected DoctorID ', selectedDoctor);
+                // console.log('useEffet check...')
+                // console.log('select Date: ', selectedDate.toDateString());
+                // console.log('Selected DoctorID ', selectedDoctor);
                 
                 
 
@@ -218,7 +218,7 @@ const ManageDoctorSchedule = () => {
                         </thead>
                         <tbody>
                             {scheduleList && scheduleList.length > 0 ? (scheduleList.map((item, index) => {
-                                console.log(item);
+                                //console.log(item);
                                 return (
                                     <tr key={item._id}>
                                         <td>{index +1}</td>

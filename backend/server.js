@@ -35,7 +35,9 @@ const whitelist = ['https://www.yoursite.com',
 'http://localhost',
 'http://localhost:80',
 'http://127.0.0.1',
-'http://127.0.0.1:80', 'http://3.84.212.103','http://3.84.212.103:80'];
+'http://127.0.0.1:80', 
+'http://127.0.0.1:5173', 'http://localhost:5173', // vite
+'http://3.84.212.103','http://3.84.212.103:80']; // ec2
 const corsOptions={
     origin: (origin, callback)=>{
         if(whitelist.lastIndexOf(origin) !==-1 || !origin){
